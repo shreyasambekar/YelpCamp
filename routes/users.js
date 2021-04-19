@@ -17,8 +17,10 @@ router.post('/register', catchAsync(async (req, res, next) => {
             if (err) {
                 return next(err)
             }
+            const redirectUrl = req.session.returnTo || '/campgrounds'
+            delete req.session.returnTo
             req.flash('success', 'Welcome to Yelp Camp!')
-            res.redirect('/campgrounds')
+            res.redirect(redirectUrl)
         })
     }
     catch (e) {
